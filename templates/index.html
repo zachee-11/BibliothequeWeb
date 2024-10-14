@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Bibliothèque - Accueil</title>
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Bibliothèque</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/ajouter">Ajouter un livre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rechercher">Rechercher un livre</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+    <h2 class="text-center">Liste des livres disponibles</h2>
+
+    {% if livres %}
+        <ul class="list-group">
+            {% for livre in livres %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ livre.titre }}</strong> par {{ livre.auteur }} ({{ livre.genre }}, {{ livre.annee_publication }})
+                    </div>
+                    <div>
+                        <a href="/update/{{ livre.titre }}" class="btn btn-sm btn-primary">Modifier</a>
+                        <form action="/delete/{{ livre.titre }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun livre disponible.</p>
+    {% endif %}
+</div>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Bibliothèque en ligne - Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
